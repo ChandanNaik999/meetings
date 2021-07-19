@@ -1,0 +1,25 @@
+{
+  "name": "meetings",
+  "version": "1.0.0",
+  "description": "A simple meetings application",
+  "main": "index.js",
+  "scripts": {
+    "copy" : "cpx \"node_modules/bootstrap/**/*\" \"public/external\"",
+    "start" : "http-server -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChandanNaik999/meetings.git"
+  },
+  "author": "chandan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChandanNaik999/meetings/issues"
+  },
+  "homepage": "https://github.com/ChandanNaik999/meetings#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.2",
+    "cpx": "^1.5.0",
+    "http-server": "^0.12.3"
+  }
+}
