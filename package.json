@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "copy": "cpx \"node_modules/bootstrap/**/*\" \"public/external\"",
-    "start": "http-server -c-1"
+    "start": "http-server -c-1 ./dist",
+    "build": "webpack",
+    "lint:fix": "eslint --fix ./public/js",
+    "lint": "eslint ./public/js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors"
   },
   "repository": {
     "type": "git",
@@ -18,17 +24,20 @@
   },
   "homepage": "https://github.com/ChandanNaik999/meetings#readme",
   "dependencies": {
-    "bootstrap": "^5.0.2",
-    "cpx": "^1.5.0",
-    "http-server": "^0.12.3"
+    "bootstrap": "^5.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
+    "babel-loader": "^8.2.2",
+    "cpx": "^1.5.0",
     "css-loader": "^6.2.0",
     "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
     "html-webpack-plugin": "^5.3.2",
+    "http-server": "^0.12.3",
     "style-loader": "^3.2.1",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
