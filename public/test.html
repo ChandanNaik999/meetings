@@ -3,44 +3,37 @@
 
 <head>
 
-	<!-- Including the bootstrap CDN -->
-	<link rel="stylesheet" href=
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-	</script>
-	<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
-	</script>
-	<script src=
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
-	</script>
+    <!-- Including the bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+    </script>
 </head>
 
 <body>
 
-	<!-- Creating a navigation bar using the
-		.navbar class of bootstrap -->
-	<nav class="navbar navbar-expand-sm bg-light">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+        </li>
+      </ul>
+      
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane container active" id="home">...</div>
+        <div class="tab-pane container fade" id="menu1">...</div>
+        <div class="tab-pane container fade" id="menu2">...</div>
+      </div>
 
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-				About
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-				Contacts
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-				Settings
-				</a>
-			</li>
-		</ul>
-	</nav>
 </body>
 
 </html>

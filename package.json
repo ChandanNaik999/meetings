@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/ChandanNaik999/meetings#readme",
   "dependencies": {
-    "bootstrap": "^5.0.2"
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.2",
+    "jquery": "^3.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
