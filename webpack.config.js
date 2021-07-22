@@ -5,7 +5,8 @@ module.exports = {
     mode: "development",
     entry: {
         "index": "./public/js/index.js",
-        "meetings": "./public/js/meetings.js",
+        "add_meeting": "./public/js/add_meeting.js",
+        "search_meetings": "./public/js/search_meetings.js",
         "teams": "./public/js/teams.js",
     },
     output: {
@@ -37,11 +38,18 @@ module.exports = {
             chunks: [ 'index' ]
         }),
         new HtmlWebpackPlugin({
-            title: 'Meetings',
-            filename: './meetings.html',
-            template: path.join( __dirname, 'public', 'meetings.html' ),
+            title: 'Search Meetings',
+            filename: './search_meetings.html',
+            template: path.join( __dirname, 'public', 'search_meetings.html' ),
             inject: true,
-            chunks: [ 'meetings' ]
+            chunks: [ 'search_meetings' ]
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Add Meetings',
+            filename: './add_meeting.html',
+            template: path.join( __dirname, 'public', 'add_meeting.html' ),
+            inject: true,
+            chunks: [ 'add_meeting' ]
         }),
         new HtmlWebpackPlugin({
             title: 'Teams',

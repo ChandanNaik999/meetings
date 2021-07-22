@@ -3,6 +3,8 @@
   <head>
       <meta charset="UTF-8">
       <title>Calendar</title>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+      <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
       <style>
           :root { 
               font-size: 16px;
@@ -27,7 +29,7 @@
                 <a class="nav-link active" href="/">Calendar</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/meetings">Meetings</a>
+                <a class="nav-link" href="/search_meetings">Meetings</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/teams">Teams</a>
@@ -65,6 +67,8 @@
                     <div class="pb-1"><h3>12 September 2020</h3></div>
                     <div class="text-secondary"><h4>Saturday</h4></div>
                 </div>
+                <!-- <input type="text" id="datepicker" value="9 Oct 2014"> -->
+
                 <div>Date Picker Here</div>
             </div>
     
@@ -80,6 +84,16 @@
             </div>
         </div>
     </main>
+
+    <!-- <script>
+        var picker = new Pikaday({
+        field: document.getElementById('datepicker'),
+        format: 'D MMM YYYY',
+        onSelect: function() {
+            console.log(this.getMoment().format('Do MMMM YYYY'));
+        }
+    });
+    </script> -->
 
   </body>
 </html>
