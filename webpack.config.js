@@ -8,6 +8,7 @@ module.exports = {
         "add_meeting": "./public/js/add_meeting.js",
         "search_meetings": "./public/js/search_meetings.js",
         "teams": "./public/js/teams.js",
+        "signup": "./public/js/signup.js"
     },
     output: {
         path: path.join( __dirname, "dist" ),
@@ -57,6 +58,13 @@ module.exports = {
             template: path.join( __dirname, 'public', 'teams.html' ),
             inject: true,
             chunks: [ 'teams' ]
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Signup',
+            filename: './signup.html',
+            template: path.join( __dirname, 'public', 'signup.html' ),
+            inject: true,
+            chunks: [ 'signup' ]
         })
     ]
 }
