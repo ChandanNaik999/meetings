@@ -7,6 +7,7 @@
     "copy": "cpx \"node_modules/bootstrap/**/*\" \"public/external\"",
     "start": "http-server -c-1 ./dist",
     "build": "webpack",
+    "build:watch": "webpack --watch",
     "lint:fix": "eslint --fix ./public/js",
     "lint": "eslint ./public/js",
     "test": "jest",
