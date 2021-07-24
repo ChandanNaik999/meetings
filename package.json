@@ -26,8 +26,11 @@
   },
   "homepage": "https://github.com/ChandanNaik999/meetings#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
-    "pikaday": "^1.8.2"
+    "core-js": "^3.15.2",
+    "pikaday": "^1.8.2",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
