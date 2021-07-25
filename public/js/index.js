@@ -4,6 +4,7 @@ import 'pikaday/css/pikaday.css';
 import 'pikaday/pikaday'
 import { fetchMeetings, fetchWorkshops } from './services/meetings';
 import { getMeetingDuration } from './util/meetings_util';
+import { TOKEN } from './constants';
 
 var picker = new Pikaday({
     field: document.getElementById('datepicker'),
@@ -137,6 +138,11 @@ const test_meeting = [
 
 
 function init(){
+    // redirect to login page if authorization token doesnt exist
+    if(localStorage.getItem(TOKEN) === null){
+        window.location = '/login';
+    }
+
     let today = new Date();
     document.getElementById('datepicker').value = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
     setDate(today);

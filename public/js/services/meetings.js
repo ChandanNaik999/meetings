@@ -21,6 +21,61 @@ async function fetchMeetings(date) {
     return response.data;
 }
 
+
+async function searchMeetings(selectedDateOption, searchText="") {
+    
+    let url = `${API_BASE_URL}/meetings/?period=${selectedDateOption}`
+    if(searchText !== ""){
+        url += '&search='
+        url += (searchText.split(" ")).join('%20');
+    }
+    console.log(url);
+
+    const response = await axios.get(
+        url,
+        {
+            headers: {
+                Authorization: `${getToken()}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+async function addAttendeeToMeeting(meeting, email) {
+    
+    const response = await axios.patch(
+        `${API_BASE_URL}/meetings/${meeting['_id']}?action=add_attendee&email=${email}`,
+        {},
+        {
+            headers: {
+                Authorization: `${getToken()}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+async function excuseFromMeeting(meeting) {
+    
+    const response = await axios.patch(
+        `${API_BASE_URL}/meetings/${meeting['_id']}?action=remove_attendee`,
+        {},
+        {
+            headers: {
+                Authorization: `${getToken()}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+
+
+
 async function fetchMeetingById( id ) {
     const response = await axios.get(
         `${API_BASE_URL}/workshops/${id}`,
@@ -49,6 +104,9 @@ async function deleteMeetingById( id ) {
 
 export {
     fetchMeetings,
+    searchMeetings,
+    addAttendeeToMeeting,
+    excuseFromMeeting,
     fetchMeetingById,
     deleteMeetingById,
 };
