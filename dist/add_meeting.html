@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Meetings</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+  <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
   <style>
     :root {
       font-size: 16px;
@@ -76,21 +78,52 @@
     <div id="add-meeting">
       <form class="bg-info p-3 mt-2 rounded">
         <h2 class="pb-3 mb-3 mt-3 text-white border-bottom">Add a new meeting</h2>
+
         <div class="form-group mb-3">
           <label class="mb-1" for="formGroupDateInput">Date</label>
-          <!-- TODO -->
-          <input type="text" class="form-control" id="formGroupDateInput" placeholder="Date Selector">
+          <input type="text" class="form-control" id="formGroupDateInput">
         </div>
 
         <!-- TODO -->
-        <div class="form-group mb-3">
+        <div class="row gy-1 gx-3 mb-3 align-items-center">
           <label class="mb-1" for="formGroupStartTime">Start Time </label>
+          <div class="col-auto">
+              <label class="visually-hidden" for="selectStartTimeHours">Hours</label>
+              <select class="form-select" id="selectStartTimeHours">
+              </select>
+          </div>
+
+          <div class="col-auto">
+            <span> : </span>
+          </div>
+
+          <div class="col-auto">
+            <label class="visually-hidden" for="selectStartTimeMins">Minutes</label>
+            <select class="form-select" id="selectStartTimeMins">
+            </select>
+        </div>
+      </div>
+
+      <div class="row gy-1 gx-3 mb-3 align-items-center">
+        <label class="mb-1" for="formGroupStartTime">EndTime </label>
+        <div class="col-auto">
+            <label class="visually-hidden" for="selectEndTimeHours">Hours</label>
+            <select class="form-select" id="selectEndTimeHours">
+            </select>
         </div>
 
-        <div class="form-group mb-3 ">
-          <label class="mb-1" for="formGroupStartTime">End Time </label>
+        <div class="col-auto">
+          <span> : </span>
         </div>
 
+        <div class="col-auto">
+          <label class="visually-hidden" for="selectEndTimeMins">Minutes</label>
+          <select class="form-select" id="selectEndTimeMins">
+          </select>
+      </div>
+    </div>
+
+        
         <div class="form-group mb-4">
           <label class="mb-1" for="formGroupMeetingDescription">Search For </label>
           <textarea class="p-2 form-control" id="formGroupMeetingDescription" spellcheck="false"
