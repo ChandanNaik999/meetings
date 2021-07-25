@@ -17,6 +17,44 @@
             border: 0;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
+
+        /* .calendar-container{
+            position: relative;
+        } */
+
+        .calendar-hour {
+            position: relative;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .calendar-hour-bg{
+            position: relative;
+        }
+
+        /* .calendar-hour:last-child  {
+            
+        } */
+
+        .card-meeting{
+            position: absolute;    
+            width: auto;
+            right: 10px;
+            left: 10px;
+            z-index: 2;
+            padding: 10px;
+            background-color: azure;
+            font-size: small;  
+            border-radius: 0.2em;
+            border-color: black;
+            border-width: 1px;
+            border-style: solid;
+            overflow: hidden;
+        }
+
+        /* .card-meeting > p{
+            font-size: 0.8em;
+        } */
     </style>
 <script defer src="index.bundle.js"></script></head>
 
@@ -42,7 +80,7 @@
                     <a class="nav-link" href="/account">Hi, test@gmail.com</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-link" href="#">Logout</a>
+                    <a class="nav-link" id="logoutLink" href="#">Logout</a>
                 </li>
             </ul>
 
@@ -58,18 +96,13 @@
         <div class="container my-3">
             <h1 class="pb-3 mb-3 border-bottom">Calendar</h1>
 
-            <!-- <div class="d-flex justify-content-between align-items-center">
-                <h1>List of Workshops</h1>
-                <button class="btn btn-primary btn-sm">Hide details</button>
-            </div> -->
-
             <div class="d-flex justify-content-between align-items-center">
                 <div class="col">
                     <div class="pb-1">
-                        <h3 id="selected-date">12 September 2020</h3>
+                        <h3 id="selectedDate">12 September 2020</h3>
                     </div>
                     <div class="text-secondary">
-                        <h4 id="selected-day">Saturday</h4>
+                        <h4 id="selectedDay">Saturday</h4>
                     </div>
                 </div>
                 <div>
@@ -83,34 +116,10 @@
 
         <!-- CALENDAR -->
 
-        <div class="container my-3" id="calendarContainer">
-
-            <div class="d-flex mb-2">
-                <div class="p-2">00:00</div>
-                <div class="p-2 flex-grow-1 bg-info"></div>
-            </div>
-
-            <div class="d-flex mb-2">
-                <div class="p-2">01:00</div>
-                <div class="p-2 flex-grow-1 bg-info"></div>
-            </div>
-
-            <div class="d-flex mb-2">
-                <div class="p-2">02:00</div>
-                <div class="p-2 flex-grow-1 bg-info"></div>
-            </div>
+        <div class="container my-3 calendar-container" id="calendarContainer">
+            
         </div>
     </main>
-
-    <!-- <script>
-        var picker = new Pikaday({
-        field: document.getElementById('datepicker'),
-        format: 'D MMM YYYY',
-        onSelect: function() {
-            console.log(this.getMoment().format('Do MMMM YYYY'));
-        }
-    });
-    </script> -->
 
 </body>
 

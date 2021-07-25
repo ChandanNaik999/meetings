@@ -1,7 +1,7 @@
 import { logout } from './services/auth';
 
 function setNavbar() {
-    document.getElementById( 'logout-link' ).addEventListener( 'click', function() {
+    document.getElementById( 'logoutLink' ).addEventListener( 'click', function() {
         logout();
         window.location = '/login';
     });
