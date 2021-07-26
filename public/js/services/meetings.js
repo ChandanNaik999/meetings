@@ -74,6 +74,22 @@ async function excuseFromMeeting(meeting) {
 }
 
 
+async function addMeeting(submitJSON) {
+    
+    const response = await axios.post(
+        `${API_BASE_URL}/meetings/`,
+        submitJSON,
+        {
+            headers: {
+                Authorization: `${getToken()}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+
 
 
 async function fetchMeetingById( id ) {
@@ -107,6 +123,7 @@ export {
     searchMeetings,
     addAttendeeToMeeting,
     excuseFromMeeting,
+    addMeeting,
     fetchMeetingById,
     deleteMeetingById,
 };

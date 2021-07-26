@@ -2,6 +2,8 @@ import axios from 'axios';
 import { API_BASE_URL } from '../constants';
 import { getToken } from './auth';
 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 /**
  * Get the list of all registered users.
