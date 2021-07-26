@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { API_BASE_URL, TOKEN, EMAIL, NAME } from '../constants';
 
-
-
 /**
  * @param {object} credentials An object with name, email and password
- * @returns A promise that resolves with the register response data, or rejects if requests to register fails
+ * @returns A promise that resolves with the register response data, or rejects if requests
+ * to register fails
  * * @example credentials
  * {
  *  "name": "Prashanth Puranik",
@@ -27,20 +26,18 @@ async function register( credentials ) {
     return response.data;
 }
 
-
 /**
  * @param {object} credentials An object with email and password
- * @returns A promise that resolves with the login response data, or rejects if requests to login fails
- * 
+ * @returns A promise that resolves with the login response data, or rejects if requests to
+ * login fails
  * @example credentials
  * {
  *  "email": "purani20@example.com",
  *  "password": "Purani@2"
  * }
  */
- async function login( credentials ) {
-
-    const response =  await axios.post(
+async function login( credentials ) {
+    const response = await axios.post(
         `${API_BASE_URL}/auth/login`,
         credentials,
         {
@@ -50,7 +47,6 @@ async function register( credentials ) {
         },
     );
     return response.data;
-    
 }
 
 /**

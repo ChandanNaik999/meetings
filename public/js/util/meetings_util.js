@@ -3,12 +3,8 @@
  * @param {JSON} startTime The format for start time is { "hours": 9, "minutes": 0 }
  * @param {JSON} EndTime The format for end time is { "hours": 9, "minutes": 0 }
  */
-function getMeetingDuration(startTime, endTime){
-    endTime = ( endTime['minutes'] + endTime['hours'] * 60 )
-    startTime = ( startTime['minutes'] + startTime['hours'] * 60 )
-    return endTime - startTime;
+function getMeetingDuration( startTime, endTime ) {
+    return ( endTime['minutes'] + endTime['hours'] * 60 ) - ( startTime['minutes'] + startTime['hours'] * 60 );
 }
 
-export {
-    getMeetingDuration,
-}
+export default getMeetingDuration;

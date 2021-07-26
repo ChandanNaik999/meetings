@@ -11,7 +11,14 @@
         "sourceType": "module"
     },
     "rules": {
-        "eol-last": ["off"],
-        "linebreak-style": ["off"],
+        "linebreak-style": ["error", "windows"],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "indent": ["error", 4],
+        "space-in-parens": ["error", "always"],
+        "object-curly-newline": ["off"],
+        "dot-notation": ["off"],
+        "no-alert": ["off"],
+        "no-undef": ["off"]
     }
 }
