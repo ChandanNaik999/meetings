@@ -1,3 +1,4 @@
+import { NAME } from './constants';
 import { logout } from './services/auth';
 
 function setNavbar() {
@@ -5,6 +6,8 @@ function setNavbar() {
         logout();
         window.location = '/login';
     } );
+    const [firstName] = localStorage.getItem( NAME ).split( ' ' );
+    document.getElementById( 'nameNav' ).innerHTML = firstName;
 }
 
 setNavbar();

@@ -76,7 +76,6 @@ function populateMeetingsList( meetings, users ) {
             } );
 
             selectMember.innerHTML = '<option value="none" selected>Select member</option>';
-            nonMembers.slice( 0, 6 );
             nonMembers.forEach( ( nonMember ) => {
                 selectMember.innerHTML += `<option value="${nonMember['email']}">${nonMember['email']}</option>`;
             } );

@@ -3,7 +3,7 @@ A simple calendar and meetings application
 
 ## Tasks
 
-| Page Title  | UI  | Frontend( JS ) | Backend | Screenshot
+| Page Title  | UI  | Frontend(JS) | Backend | Screenshot
 | :-----------: | :---: | :-----------: | :-----------: | :-----------: |
 | Register | :white_check_mark: | :white_check_mark: | :x: | <img src="./screenshots/register.png" alt="Signup" width="500"/>
 | Login | :white_check_mark: | :white_check_mark: | :x: | <img src="./screenshots/login.png" alt="Login" width="500"/>

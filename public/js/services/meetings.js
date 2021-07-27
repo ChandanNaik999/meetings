@@ -82,31 +82,31 @@ async function addMeeting( submitJSON ) {
     return response.data;
 }
 
-async function fetchMeetingById( id ) {
-    const response = await axios.get(
-        `${API_BASE_URL}/workshops/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-            },
-        },
-    );
+// async function fetchMeetingById( id ) {
+//     const response = await axios.get(
+//         `${API_BASE_URL}/workshops/${id}`,
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${getToken()}`,
+//             },
+//         },
+//     );
 
-    return response.data;
-}
+//     return response.data;
+// }
 
-async function deleteMeetingById( id ) {
-    const response = await axios.delete(
-        `${API_BASE_URL}/workshops/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-            },
-        },
-    );
+// async function deleteMeetingById( id ) {
+//     const response = await axios.delete(
+//         `${API_BASE_URL}/workshops/${id}`,
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${getToken()}`,
+//             },
+//         },
+//     );
 
-    return response;
-}
+//     return response;
+// }
 
 export {
     fetchMeetings,
@@ -114,6 +114,4 @@ export {
     addAttendeeToMeeting,
     excuseFromMeeting,
     addMeeting,
-    fetchMeetingById,
-    deleteMeetingById,
 };
