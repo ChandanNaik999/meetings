@@ -3,6 +3,7 @@ import './app';
 import { TOKEN } from './constants';
 import getAllUsers from './services/user_management';
 import { addMeeting } from './services/meetings';
+import { fetchTeams } from './services/teams';
 import ADD_MEETING_FORM from './data/add_meeting_form';
 
 const picker = new Pikaday( {
@@ -27,7 +28,6 @@ function validateTeam( team ) {
 }
 
 function attendeeType( attendee ) {
-    // TODO : match input with email type and team type
     let type = '';
     if ( validateEmail( attendee ) ) {
         type = 'email';
@@ -72,28 +72,53 @@ document.getElementById( 'addMeetingForm' ).addEventListener( 'submit', ( event 
     submitJSON['endTime']['minutes'] = selectEndTimeMins;
 
     const attendeesJSON = [];
+    let attendeesLength = attendees.length;
 
     getAllUsers()
         .then( ( users ) => {
-            attendees.forEach( ( attendee ) => {
-                if ( attendeeType( attendee ) === 'email' ) {
-                    for ( let idx = 0; idx < users.length; idx += 1 ) {
-                        if ( attendee.toLowerCase() === users[idx]['email'].toLowerCase() ) {
-                            attendeesJSON.push( {
-                                userId: users[idx]['_id'],
-                                email: users[idx]['email'],
-                            } );
+            fetchTeams()
+                .then( ( teams ) => {
+                    for ( let idxAtt = 0; idxAtt < attendeesLength; idxAtt += 1 ) {
+                        const attendee = attendees[idxAtt];
+                        switch ( attendeeType( attendees[idxAtt] ) ) {
+                        case 'email':
+                            for ( let idx = 0; idx < users.length; idx += 1 ) {
+                                if ( attendee.toLowerCase() === users[idx]['email'].toLowerCase() ) {
+                                    attendeesJSON.push( {
+                                        userId: users[idx]['_id'],
+                                        email: users[idx]['email'],
+                                    } );
+                                    break;
+                                }
+                            }
+                            break;
+                        case 'team':
+                            for ( let idx = 0; idx < teams.length; idx += 1 ) {
+                                if ( attendee === `@${teams[idx]['shortName']}` ) {
+                                    const teamMemberEmails = ( teams[idx]['members'] ).map( ( x ) => x['email'] );
+                                    teamMemberEmails.forEach( ( member ) => {
+                                        if ( attendees.includes( member ) === false ) {
+                                            attendees.push( member );
+                                        }
+                                    } );
+                                    attendeesLength += teams[idx]['members'].length;
+                                    break;
+                                }
+                            }
+                            break;
+                        default: break;
                         }
                     }
-                }
-            } );
-            submitJSON['attendees'] = attendeesJSON;
-
-            // submit constructed meeting
-            addMeeting( submitJSON )
-                .then( () => {
-                    // TODO: Confirmation message
-                    resetForm();
+                    submitJSON['attendees'] = attendeesJSON;
+                    // submit constructed meeting
+                    addMeeting( submitJSON )
+                        .then( () => {
+                            // TODO: Confirmation message
+                            resetForm();
+                        } )
+                        .catch( ( error ) => {
+                            alert( error.message );
+                        } );
                 } )
                 .catch( ( error ) => {
                     alert( error.message );
