@@ -1,0 +1,20 @@
+:root {
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.my-col {
+    flex-basis: 30%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

@@ -1,7 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/main.css';
+import '../css/search_meetings.css';
+import addToast from './customs/app';
 import './app';
 import { addAttendeeToMeeting, searchMeetings, excuseFromMeeting } from './services/meetings';
 import getAllUsers from './services/user_management';
+import { SUCCESS, ERROR } from './constants';
+
+function formatTime( hours, minutes ) {
+    let result = '';
+    if ( hours < 10 ) {
+        result += `0${hours}`;
+    } else {
+        result += hours;
+    }
+    result += ':';
+    if ( minutes < 10 ) {
+        result += `0${minutes}`;
+    } else {
+        result += minutes;
+    }
+    return result;
+}
 
 function populateMeetingsList( meetings, users ) {
     const meetingsListDiv = document.getElementById( 'searchMeetingsList' );
@@ -26,7 +46,9 @@ function populateMeetingsList( meetings, users ) {
 
             const cardTitle = document.createElement( 'h5' );
             const date = new Date( meeting['date'] );
-            cardTitle.innerHTML = `${date.toDateString()} ${date.toLocaleTimeString()}`;
+            const startTime = formatTime( meeting['startTime']['hours'], meeting['startTime']['minutes'] );
+            const endTime = formatTime( meeting['endTime']['hours'], meeting['endTime']['minutes'] );
+            cardTitle.innerHTML = `${date.toDateString()}, ${startTime}-${endTime}`;
             cardBody.appendChild( cardTitle );
             const cardText = document.createElement( 'p' );
             cardText.innerHTML = meeting['name'];
@@ -36,11 +58,20 @@ function populateMeetingsList( meetings, users ) {
             buttonExcuse.setAttribute( 'class', 'btn btn-danger' );
             buttonExcuse.addEventListener( 'click', () => {
                 excuseFromMeeting( meeting )
-                    .then( () => {
-                        card.remove();
+                    .then( ( response ) => {
+                        if ( response.message === SUCCESS ) {
+                            addToast( 'You have been removed from the team', document.body, SUCCESS );
+                            card.remove();
+                        } else {
+                            addToast( `Error removing: ${response.message}`, document.body, ERROR );
+                        }
                     } )
                     .catch( ( error ) => {
-                        alert( error.message );
+                        try {
+                            addToast( `Error removing: ${error.response.data.description}`, document.body, ERROR );
+                        } catch {
+                            addToast( `Error removing: ${error.message}`, document.body, ERROR );
+                        }
                     } );
             } );
             cardBody.appendChild( buttonExcuse );
@@ -92,12 +123,20 @@ function populateMeetingsList( meetings, users ) {
             colSelectButton.addEventListener( 'click', () => {
                 if ( selectMember.value !== 'none' ) {
                     addAttendeeToMeeting( meeting, selectMember.value )
-                        .then( () => {
-                            attendees.push( selectMember.value );
-                            meetingAttendees.innerHTML = `<strong>Attendees: </strong> ${attendees.join( ', ' )}`;
+                        .then( ( response ) => {
+                            if ( response.message === SUCCESS ) {
+                                attendees.push( selectMember.value );
+                                meetingAttendees.innerHTML = `<strong>Attendees: </strong> ${attendees.join( ', ' )}`;
+                            } else {
+                                addToast( `Error adding attendee: ${response.message}`, document.body, ERROR );
+                            }
                         } )
                         .catch( ( error ) => {
-                            alert( error.message );
+                            try {
+                                addToast( `Error adding attendee: ${error.response.data.description}`, document.body, ERROR );
+                            } catch {
+                                addToast( `Error adding attendee: ${error.message}`, document.body, ERROR );
+                            }
                         } );
                 }
             } );
@@ -123,30 +162,62 @@ document.getElementById( 'search-form' ).addEventListener( 'submit', ( event ) =
     if ( searchText === '' ) {
         searchMeetings( selectedDateOption )
             .then( ( meetings ) => {
-                getAllUsers()
-                    .then( ( users ) => {
-                        populateMeetingsList( meetings, users );
-                    } )
-                    .catch( ( error ) => {
-                        alert( error.message );
-                    } );
+                if ( meetings.message === SUCCESS ) {
+                    getAllUsers()
+                        .then( ( users ) => {
+                            if ( users.message === SUCCESS ) {
+                                populateMeetingsList( meetings.data, users.data );
+                            } else {
+                                addToast( `Error fetching users: ${users.message}`, document.body, ERROR );
+                            }
+                        } )
+                        .catch( ( error ) => {
+                            try {
+                                addToast( `Error fetching users: ${error.response.data.description}`, document.body, ERROR );
+                            } catch {
+                                addToast( `Error fetching users: ${error.message}`, document.body, ERROR );
+                            }
+                        } );
+                } else {
+                    addToast( `Error fetching meetings: ${meetings.message}`, document.body, ERROR );
+                }
             } )
             .catch( ( error ) => {
-                alert( error.message );
+                try {
+                    addToast( `Error Fetching your meetings: ${error.response.data.description}`, document.body, ERROR );
+                } catch {
+                    addToast( `Error Fetching your meetings: ${error.message}`, document.body, ERROR );
+                }
             } );
     } else {
         searchMeetings( selectedDateOption, searchText )
             .then( ( meetings ) => {
-                getAllUsers()
-                    .then( ( users ) => {
-                        populateMeetingsList( meetings, users );
-                    } )
-                    .catch( ( error ) => {
-                        alert( error.message );
-                    } );
+                if ( meetings.message === SUCCESS ) {
+                    getAllUsers()
+                        .then( ( users ) => {
+                            if ( users.message === SUCCESS ) {
+                                populateMeetingsList( meetings.data, users.data );
+                            } else {
+                                addToast( `Error Fetching users: ${users.message}`, document.body, ERROR );
+                            }
+                        } )
+                        .catch( ( error ) => {
+                            try {
+                                addToast( `Error Fetching users: ${error.response.data.description}`, document.body, ERROR );
+                            } catch {
+                                addToast( `Error Fetching users: ${error.message}`, document.body, ERROR );
+                            }
+                        } );
+                } else {
+                    addToast( `Error fetching meetings: ${meetings.message}`, document.body, ERROR );
+                }
             } )
             .catch( ( error ) => {
-                alert( error.message );
+                try {
+                    addToast( `Error Fetching your meetings: ${error.response.data.description}`, document.body, ERROR );
+                } catch {
+                    addToast( `Error Fetching your meetings: ${error.message}`, document.body, ERROR );
+                }
             } );
     }
 } );
@@ -154,16 +225,32 @@ document.getElementById( 'search-form' ).addEventListener( 'submit', ( event ) =
 function init() {
     searchMeetings( 'present' )
         .then( ( meetings ) => {
-            getAllUsers()
-                .then( ( users ) => {
-                    populateMeetingsList( meetings, users );
-                } )
-                .catch( ( error ) => {
-                    alert( error.message );
-                } );
+            if ( meetings.message === SUCCESS ) {
+                getAllUsers()
+                    .then( ( users ) => {
+                        if ( users.message === SUCCESS ) {
+                            populateMeetingsList( meetings.data, users.data );
+                        } else {
+                            addToast( `Error Fetching users: ${users.message}`, document.body, ERROR );
+                        }
+                    } )
+                    .catch( ( error ) => {
+                        try {
+                            addToast( `Error Fetching users: ${error.response.data.description}`, document.body, ERROR );
+                        } catch {
+                            addToast( `Error Fetching users: ${error.message}`, document.body, ERROR );
+                        }
+                    } );
+            } else {
+                addToast( `Error fetching meetings: ${meetings.message}`, document.body, ERROR );
+            }
         } )
         .catch( ( error ) => {
-            alert( error.message );
+            try {
+                addToast( `Error Fetching your meetings: ${error.response.data.description}`, document.body, ERROR );
+            } catch {
+                addToast( `Error Fetching your meetings: ${error.message}`, document.body, ERROR );
+            }
         } );
 }
 

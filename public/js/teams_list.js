@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/main.css';
+import '../css/teams_list.css';
+import addToast from './customs/app';
+import { SUCCESS, ERROR, TOKEN } from './constants';
 import './app';
 import { addMemberToTeam, fetchTeams, excuseFromTeam, addTeam } from './services/teams';
 import ADD_TEAM_FORM from './data/add_team_form';
 import getAllUsers from './services/user_management';
-import { TOKEN } from './constants';
 
 let users = [];
 
@@ -41,11 +44,20 @@ function populateTeams( teams ) {
             buttonExcuse.setAttribute( 'class', 'btn btn-danger' );
             buttonExcuse.addEventListener( 'click', () => {
                 excuseFromTeam( team )
-                    .then( () => {
-                        card.remove();
+                    .then( ( response ) => {
+                        if ( response.message === SUCCESS ) {
+                            addToast( 'You have been removed from the team', document.body, SUCCESS );
+                            card.remove();
+                        } else {
+                            addToast( `Error removing: ${response.message}`, document.body, ERROR );
+                        }
                     } )
                     .catch( ( error ) => {
-                        alert( error.message );
+                        try {
+                            addToast( `Error removing: ${error.response.data.description}`, document.body, ERROR );
+                        } catch {
+                            addToast( `Error removing: ${error.message}`, document.body, ERROR );
+                        }
                     } );
             } );
             cardBody.appendChild( buttonExcuse );
@@ -97,12 +109,21 @@ function populateTeams( teams ) {
             colSelectButton.addEventListener( 'click', () => {
                 if ( selectMember.value !== 'none' ) {
                     addMemberToTeam( team, selectMember.value )
-                        .then( () => {
-                            members.push( selectMember.value );
-                            teamMembers.innerHTML = `<strong>Attendees: </strong> ${members.join( ', ' )}`;
+                        .then( ( response ) => {
+                            if ( response.message === SUCCESS ) {
+                                members.push( selectMember.value );
+                                teamMembers.innerHTML = `<strong>Attendees: </strong> ${members.join( ', ' )}`;
+                                addToast( 'Added member successfully', document.body, SUCCESS );
+                            } else {
+                                addToast( `Error adding member: ${response.message}`, document.body, ERROR );
+                            }
                         } )
                         .catch( ( error ) => {
-                            alert( error.message );
+                            try {
+                                addToast( `Error adding member: ${error.response.data.description}`, document.body, ERROR );
+                            } catch {
+                                addToast( `Error adding member: ${error.message}`, document.body, ERROR );
+                            }
                         } );
                 }
             } );
@@ -129,17 +150,33 @@ function init() {
     // fetch your teams
     fetchTeams()
         .then( ( teams ) => {
-            getAllUsers()
-                .then( ( _users ) => {
-                    users = _users;
-                    populateTeams( teams );
-                } )
-                .catch( ( error ) => {
-                    alert( error.message );
-                } );
+            if ( teams.message === SUCCESS ) {
+                getAllUsers()
+                    .then( ( _users ) => {
+                        if ( _users.message === SUCCESS ) {
+                            users = _users.data;
+                            populateTeams( teams.data );
+                        } else {
+                            addToast( `Error fetching users: ${_users.message}`, document.body, ERROR );
+                        }
+                    } )
+                    .catch( ( error ) => {
+                        try {
+                            addToast( `Error fetching users: ${error.response.data.description}`, document.body, ERROR );
+                        } catch {
+                            addToast( `Error fetching users: ${error.message}`, document.body, ERROR );
+                        }
+                    } );
+            } else {
+                addToast( `Error fetching teams: ${teams.message}`, document.body, ERROR );
+            }
         } )
         .catch( ( error ) => {
-            alert( error.message );
+            try {
+                addToast( `Error fetching teams: ${error.response.data.description}`, document.body, ERROR );
+            } catch {
+                addToast( `Error fetching teams: ${error.message}`, document.body, ERROR );
+            }
         } );
 }
 
@@ -212,12 +249,21 @@ document.getElementById( 'submitAddTeam' ).addEventListener( 'click', () => {
     submitJSON['members'] = attendeesJSON;
 
     addTeam( submitJSON )
-        .then( () => {
-            // TODO: Confirmation message
-            myModal.hide();
+        .then( ( response ) => {
+            if ( response.message === SUCCESS ) {
+                myModal.hide();
+                addToast( 'Team added successfully', document.body, SUCCESS );
+            } else {
+                addToast( `Error adding team: ${response.message}`, document.body, ERROR );
+            }
         } )
         .catch( ( error ) => {
-            alert( error.message );
+            myModal.hide();
+            try {
+                addToast( `Error adding team: ${error.response.data.description}`, document.body, ERROR );
+            } catch {
+                addToast( `Error adding team: ${error.message}`, document.body, ERROR );
+            }
         } );
 } );
 

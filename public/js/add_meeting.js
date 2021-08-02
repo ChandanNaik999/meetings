@@ -1,6 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/main.css';
+import '../css/add_meeting.css';
 import './app';
-import { TOKEN } from './constants';
+import addToast from './customs/app';
+import { TOKEN, SUCCESS, ERROR } from './constants';
 import getAllUsers from './services/user_management';
 import { addMeeting } from './services/meetings';
 import { fetchTeams } from './services/teams';
@@ -76,56 +79,80 @@ document.getElementById( 'addMeetingForm' ).addEventListener( 'submit', ( event 
 
     getAllUsers()
         .then( ( users ) => {
-            fetchTeams()
-                .then( ( teams ) => {
-                    for ( let idxAtt = 0; idxAtt < attendeesLength; idxAtt += 1 ) {
-                        const attendee = attendees[idxAtt];
-                        switch ( attendeeType( attendees[idxAtt] ) ) {
-                        case 'email':
-                            for ( let idx = 0; idx < users.length; idx += 1 ) {
-                                if ( attendee.toLowerCase() === users[idx]['email'].toLowerCase() ) {
-                                    attendeesJSON.push( {
-                                        userId: users[idx]['_id'],
-                                        email: users[idx]['email'],
-                                    } );
-                                    break;
-                                }
-                            }
-                            break;
-                        case 'team':
-                            for ( let idx = 0; idx < teams.length; idx += 1 ) {
-                                if ( attendee === `@${teams[idx]['shortName']}` ) {
-                                    const teamMemberEmails = ( teams[idx]['members'] ).map( ( x ) => x['email'] );
-                                    teamMemberEmails.forEach( ( member ) => {
-                                        if ( attendees.includes( member ) === false ) {
-                                            attendees.push( member );
+            if ( users.message === SUCCESS ) {
+                fetchTeams()
+                    .then( ( teams ) => {
+                        if ( teams.message === SUCCESS ) {
+                            for ( let idxAtt = 0; idxAtt < attendeesLength; idxAtt += 1 ) {
+                                const attendee = attendees[idxAtt];
+                                switch ( attendeeType( attendees[idxAtt] ) ) {
+                                case 'email':
+                                    for ( let idx = 0; idx < users.data.length; idx += 1 ) {
+                                        if ( attendee.toLowerCase() === users.data[idx]['email'].toLowerCase() ) {
+                                            attendeesJSON.push( {
+                                                userId: users.data[idx]['_id'],
+                                                email: users.data[idx]['email'],
+                                            } );
+                                            break;
                                         }
-                                    } );
-                                    attendeesLength += teams[idx]['members'].length;
+                                    }
                                     break;
+                                case 'team':
+                                    for ( let idx = 0; idx < teams.data.length; idx += 1 ) {
+                                        if ( attendee === `@${teams.data[idx]['shortName']}` ) {
+                                            const teamMemberEmails = ( teams.data[idx]['members'] ).map( ( x ) => x['email'] );
+                                            teamMemberEmails.forEach( ( member ) => {
+                                                if ( attendees.includes( member ) === false ) {
+                                                    attendees.push( member );
+                                                }
+                                            } );
+                                            attendeesLength += teams.data[idx]['members'].length;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                default: break;
                                 }
                             }
-                            break;
-                        default: break;
+                            submitJSON['attendees'] = attendeesJSON;
+                            // submit constructed meeting
+                            addMeeting( submitJSON )
+                                .then( ( response ) => {
+                                    if ( response.message === SUCCESS ) {
+                                        addToast( 'Meeting added successfully', document.body, SUCCESS );
+                                        resetForm();
+                                    } else {
+                                        addToast( `Error adding meeting: ${response.message}`, document.body, ERROR );
+                                    }
+                                } )
+                                .catch( ( error ) => {
+                                    try {
+                                        addToast( `Error adding meeting: ${error.response.data.description}`, document.body, ERROR );
+                                    } catch {
+                                        addToast( `Error adding meeting: ${error.message}`, document.body, ERROR );
+                                    }
+                                } );
+                        } else {
+                            addToast( `Error fetching teams: ${teams.message}`, document.body, ERROR );
                         }
-                    }
-                    submitJSON['attendees'] = attendeesJSON;
-                    // submit constructed meeting
-                    addMeeting( submitJSON )
-                        .then( () => {
-                            // TODO: Confirmation message
-                            resetForm();
-                        } )
-                        .catch( ( error ) => {
-                            alert( error.message );
-                        } );
-                } )
-                .catch( ( error ) => {
-                    alert( error.message );
-                } );
+                    } )
+                    .catch( ( error ) => {
+                        try {
+                            addToast( `Error fetching teams: ${error.response.data.description}`, document.body, ERROR );
+                        } catch {
+                            addToast( `Error fetching teams: ${error.message}`, document.body, ERROR );
+                        }
+                    } );
+            } else {
+                addToast( `Error fetching users: ${users.message}`, document.body, ERROR );
+            }
         } )
         .catch( ( error ) => {
-            alert( error.message );
+            try {
+                addToast( `Error fetching users: ${error.response.data.description}`, document.body, ERROR );
+            } catch {
+                addToast( `Error fetching users: ${error.message}`, document.body, ERROR );
+            }
         } );
 } );
 

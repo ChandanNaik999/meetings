@@ -4,9 +4,9 @@
   "description": "A simple meetings application",
   "main": "index.js",
   "scripts": {
-    "copy": "cpx \"node_modules/bootstrap/**/*\" \"public/external\"",
+    "toserver": "cpx \"dist/*\" \"../meetings-server/public\"",
     "start": "http-server -c-1 ./dist",
-    "build": "webpack",
+    "build": "webpack && cpx \"dist/*\" \"../meetings-server/public\"",
     "build:watch": "webpack --watch",
     "lint:fix": "eslint --fix ./public/js",
     "lint": "eslint ./public/js",

@@ -1,10 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { LOGIN_SUCCESS, TOKEN, EMAIL, NAME } from './constants';
+import '../css/main.css';
+import '../css/login.css';
+import { SUCCESS, TOKEN, EMAIL, NAME, ERROR } from './constants';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import { login } from './services/auth';
+
+import addToast from './customs/app';
 
 function init() {
     const loginForm = document.getElementById( 'login-form' );
@@ -19,18 +23,24 @@ function init() {
 
         login( { email, password } )
             .then( ( response ) => {
-                if ( response.message === LOGIN_SUCCESS ) {
-                    localStorage.setItem( TOKEN, response.token );
-                    localStorage.setItem( EMAIL, response.email );
-                    localStorage.setItem( NAME, response.name );
+                if ( response.message === SUCCESS ) {
+                    localStorage.setItem( TOKEN, response.data.token );
+                    localStorage.setItem( EMAIL, response.data.email );
+                    localStorage.setItem( NAME, response.data.name );
                     window.location = '/';
                 } else {
-                    window.location = '/login';
-                    alert( response.message );
+                    addToast( `Login Error: ${response.message}`, document.body, ERROR );
+                    setTimeout( () => {
+                        window.location = '/login';
+                    }, 1000 );
                 }
             } )
             .catch( ( error ) => {
-                alert( error.message );
+                try {
+                    addToast( `Login Error: ${error.response.data.description}`, document.body, ERROR );
+                } catch {
+                    addToast( `Login Error: ${error.message}`, document.body, ERROR );
+                }
             } );
     } );
 }

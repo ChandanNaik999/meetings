@@ -11,12 +11,7 @@ const ADD_MEETING_FORM = {
         "hours": 10,
         "minutes": 30
     },
-    "attendees": [
-        {
-            "userId": "test",
-            "email": "test@test.com"
-        }
-    ]
+    "attendees": []
 };
 
 

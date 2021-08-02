@@ -1,15 +1,18 @@
-const API_BASE_URL = 'https://mymeetingsapp.herokuapp.com/api';
+// const API_BASE_URL = 'http://mymeetingsapp.herokuapp.com/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 const TOKEN = 'token';
 const EMAIL = 'email';
 const NAME = 'name';
 
-const LOGIN_SUCCESS = 'Signed in sucessfully';
+const SUCCESS = 'success';
+const ERROR = 'error';
 
 export {
     API_BASE_URL,
     TOKEN,
     EMAIL,
     NAME,
-    LOGIN_SUCCESS,
+    SUCCESS,
+    ERROR,
 };
