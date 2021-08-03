@@ -1,53 +1,57 @@
 {
-  "name": "meetings",
-  "version": "1.0.0",
-  "description": "A simple meetings application",
-  "main": "index.js",
-  "scripts": {
-    "toserver": "cpx \"dist/*\" \"../meetings-server/public\"",
-    "start": "http-server -c-1 ./dist",
-    "build": "webpack && cpx \"dist/*\" \"../meetings-server/public\"",
-    "build:watch": "webpack --watch",
-    "lint:fix": "eslint --fix ./public/js",
-    "lint": "eslint ./public/js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --colors",
-    "d": "npm run build && npm start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ChandanNaik999/meetings.git"
-  },
-  "author": "chandan",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ChandanNaik999/meetings/issues"
-  },
-  "homepage": "https://github.com/ChandanNaik999/meetings#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bootstrap": "^5.0.2",
-    "core-js": "^3.15.2",
-    "pikaday": "^1.8.2",
-    "regenerator-runtime": "^0.13.9"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.14.8",
-    "@babel/preset-env": "^7.14.8",
-    "babel-loader": "^8.2.2",
-    "cpx": "^1.5.0",
-    "css-loader": "^6.2.0",
-    "eslint": "^7.31.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4",
-    "html-webpack-plugin": "^5.3.2",
-    "http-server": "^0.12.3",
-    "moment": "^2.29.1",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.45.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
-  }
+    "name": "meetings",
+    "version": "1.0.0",
+    "description": "A simple meetings application",
+    "main": "index.js",
+    "scripts": {
+        "toserver": "cpx \"dist/*\" \"../meetings-server/public\"",
+        "start": "http-server -c-1 ./dist",
+        "build": "webpack",
+        "build:watch": "webpack --watch",
+        "rimraf": "rimraf ../meetings-server/public",
+        "build:prod": "webpack --env production --mode production && rimraf ../meetings-server/public && cpx \"dist/*\" \"../meetings-server/public\"",
+        "build:dev": "webpack --env development --mode development && rimraf ../meetings-server/public && cpx \"dist/*\" \"../meetings-server/public\"",
+        "lint:fix": "eslint --fix ./public/js",
+        "lint": "eslint ./public/js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage --colors",
+        "d": "npm run build && npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ChandanNaik999/meetings.git"
+    },
+    "author": "chandan",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ChandanNaik999/meetings/issues"
+    },
+    "homepage": "https://github.com/ChandanNaik999/meetings#readme",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "bootstrap": "^5.0.2",
+        "core-js": "^3.15.2",
+        "pikaday": "^1.8.2",
+        "regenerator-runtime": "^0.13.9"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.14.8",
+        "@babel/core": "^7.14.8",
+        "@babel/preset-env": "^7.14.8",
+        "babel-loader": "^8.2.2",
+        "cpx": "^1.5.0",
+        "css-loader": "^6.2.0",
+        "dotenv-webpack": "^7.0.3",
+        "eslint": "^7.31.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.23.4",
+        "html-webpack-plugin": "^5.3.2",
+        "http-server": "^0.12.3",
+        "moment": "^2.29.1",
+        "style-loader": "^3.2.1",
+        "webpack": "^5.45.1",
+        "webpack-cli": "^4.7.2",
+        "webpack-dev-server": "^3.11.2"
+    }
 }

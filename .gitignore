@@ -196,3 +196,4 @@ FakesAssemblies/
 *.opt
 .env
 .env.production
+.env.development
