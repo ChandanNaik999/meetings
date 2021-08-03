@@ -373,13 +373,33 @@ document.getElementById( 'submitAddMeeting' ).addEventListener( 'click', () => {
 
     const submitJSON = ADD_MEETING_FORM;
     const meetingName = document.getElementById( 'inputMeetingName' ).value.trim();
+
+    if ( meetingName.length <= 3 ) {
+        addToast( 'Please enter a longer meeting name', document.body, ERROR );
+        return;
+    }
     const description = document.getElementById( 'textareaMeetingDescription' ).value.trim();
+    if ( description.length <= 10 ) {
+        addToast( 'Please enter a longer meeting name  ( 10 characters min )', document.body, ERROR );
+        return;
+    }
     const selectedDate = picker.getDate();
     const date = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
     const selectStartTimeHours = parseInt( document.getElementById( 'selectStartTimeHours' ).value, 10 );
     const selectEndTimeHours = parseInt( document.getElementById( 'selectEndTimeHours' ).value, 10 );
     const selectStartTimeMins = parseInt( document.getElementById( 'selectStartTimeMins' ).value, 10 );
     const selectEndTimeMins = parseInt( document.getElementById( 'selectEndTimeMins' ).value, 10 );
+
+    if ( selectEndTimeHours < selectStartTimeHours ) {
+        addToast( 'Start time has to be less than end time', document.body, ERROR );
+        return;
+    // eslint-disable-next-line no-else-return
+    // eslint-disable-next-line max-len
+    } if ( selectEndTimeHours === selectStartTimeHours && selectStartTimeMins >= selectEndTimeMins ) {
+        addToast( 'Start time has to be less than end time', document.body, ERROR );
+        return;
+    }
+
     const attendees = ( ( document.getElementById( 'inputParticipants' ).value ).replace( /\s+/g, '' ) ).split( ',' );
 
     submitJSON['name'] = meetingName;

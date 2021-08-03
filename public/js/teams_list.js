@@ -24,8 +24,8 @@ function populateTeams( teams ) {
             } );
 
             const card = document.createElement( 'div' );
-            card.setAttribute( 'class', 'card my-col p-3 m-2' );
-
+            // card.setAttribute( 'class', 'card my-col p-3 m-2 col-12 col-sm-6 col-md-4' );
+            card.setAttribute( 'class', 'card p-3 m-2' );
             const cardBody = document.createElement( 'div' );
             cardBody.setAttribute( 'class', 'card-body' );
 
@@ -218,8 +218,22 @@ document.getElementById( 'submitAddTeam' ).addEventListener( 'click', () => {
     myModal.hide();
 
     const teamName = document.getElementById( 'inputTeamName' ).value;
+    if ( teamName.length === 0 ) {
+        addToast( 'Please enter a  team name', document.body, ERROR );
+        return;
+    }
     const teamShortName = document.getElementById( 'inputShortName' ).value;
+    if ( teamName.length === 0 ) {
+        addToast( 'Please enter a team Short name.', document.body, ERROR );
+        return;
+    }
+
     const teamDescription = document.getElementById( 'teamDescription' ).value;
+
+    if ( teamName.length <= 0 ) {
+        addToast( 'Please enter a longer description ( 10 characters min )', document.body, ERROR );
+        return;
+    }
     const teamMembers = ( ( document.getElementById( 'inputMembers' ).value ).replace( /\s+/g, '' ) ).split( ',' );
 
     // TODO: Validation

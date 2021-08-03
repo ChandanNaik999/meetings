@@ -64,6 +64,8 @@
     border-color: #f1416c;
     padding: 0.4rem;
     border-radius: 8px;
+    transform: scale(1.05);
+    transition: .2s ease-in-out;
 }
 
 
