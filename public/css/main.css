@@ -86,3 +86,110 @@ body {
     display: flex;
     align-items: center;
 }
+
+.input-text {
+    color: #5e6278;
+    background-color: #f5f8fa;
+    border-color: hsl(200, 2%, 75%);
+    padding: 0.75rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+}
+
+
+.bg-green {
+    background-color: #20d489;
+}
+
+.button {
+    color: #f9f2e7;
+    background-color: #20d489;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-style: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.button-outline {
+    color: #20d489;
+    background-color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-width: 2px;
+    border-color: #20d489;
+    border-style: solid;
+    padding: 0.4rem;
+    border-radius: 8px;
+}
+
+.button-outline:hover {
+    color: #fff;
+    background-color: #20d489;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-width: 2px;
+    border-color: #20d489;
+    padding: 0.4rem;
+    border-radius: 8px;
+}
+
+
+.button-outline-red {
+    color: #f1416c;
+    background-color: #ffeff3;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-width: 2px;
+    border-color: #f1416c;
+    border-style: solid;
+    padding: 0.4rem;
+    border-radius: 8px;
+}
+
+.button-outline-red:hover {
+    color: #ffeff3;
+    background-color: #f1416c;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-width: 2px;
+    border-color: #f1416c;
+    padding: 0.4rem;
+    border-radius: 8px;
+}
+
+
+.button:hover {
+    color: #f9f2e7;
+    background-color: hsl(155, 72%, 44%);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    border-style: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.input-text {
+    color: #5e6278;
+    background-color: #f5f8fa;
+    border-color: #f5f8fa;
+    padding: 0.75rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.inputHelp {
+    font-weight: 400;
+    font-size: 14px;
+    color: #5e6278;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border: none;
+}

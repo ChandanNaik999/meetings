@@ -64,3 +64,7 @@ hr {
     height: 3px;
     align-self: center;
 }
+
+.date-input{
+    border-width: 1px;
+}

@@ -41,7 +41,7 @@ function populateTeams( teams ) {
 
             const buttonExcuse = document.createElement( 'button' );
             buttonExcuse.innerHTML = 'Excuse Yourself';
-            buttonExcuse.setAttribute( 'class', 'btn btn-danger' );
+            buttonExcuse.setAttribute( 'class', 'button-outline-red px-4' );
             buttonExcuse.addEventListener( 'click', () => {
                 excuseFromTeam( team )
                     .then( ( response ) => {
@@ -104,7 +104,7 @@ function populateTeams( teams ) {
             colSelectMember2.setAttribute( 'class', 'col-auto' );
 
             const colSelectButton = document.createElement( 'button' );
-            colSelectButton.setAttribute( 'class', 'btn btn-info text-white' );
+            colSelectButton.setAttribute( 'class', 'button mx-2' );
             colSelectButton.innerHTML = 'Add';
             colSelectButton.addEventListener( 'click', () => {
                 if ( selectMember.value !== 'none' ) {

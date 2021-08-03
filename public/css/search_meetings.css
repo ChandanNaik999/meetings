@@ -15,3 +15,39 @@ textarea {
     width: 100%;
     display: block;
 }
+
+
+.card-toolbar {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: none;
+}
+
+
+.nav-pills-custom {
+    font-size: 1rem;
+    color: #7e8299;
+    background-color: white;
+    font-weight: 600;
+    display: inline;
+    border: none;
+    border-radius: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-right: 1rem;
+}
+
+.nav-pills-custom:hover {
+    background-color: #f5f8fa;
+}
+
+.search-text-custom {
+    line-height: 0.8rem;
+    border: none;
+}
