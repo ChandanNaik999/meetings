@@ -40,7 +40,7 @@ function populateTeams( teams ) {
             cardBody.appendChild( cardText );
 
             const buttonExcuse = document.createElement( 'button' );
-            buttonExcuse.innerHTML = 'Excuse Yourself';
+            buttonExcuse.innerHTML = 'Leave team';
             buttonExcuse.setAttribute( 'class', 'button-outline-red px-4' );
             buttonExcuse.addEventListener( 'click', () => {
                 excuseFromTeam( team )
@@ -112,7 +112,7 @@ function populateTeams( teams ) {
                         .then( ( response ) => {
                             if ( response.message === SUCCESS ) {
                                 members.push( selectMember.value );
-                                teamMembers.innerHTML = `<strong>Attendees: </strong> ${members.join( ', ' )}`;
+                                teamMembers.innerHTML = `<strong>Members: </strong> ${members.join( ', ' )}`;
                                 addToast( 'Added member successfully', document.body, SUCCESS );
                             } else {
                                 addToast( `Error adding member: ${response.message}`, document.body, ERROR );

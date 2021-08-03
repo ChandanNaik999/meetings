@@ -9,7 +9,6 @@ module.exports = env => {
         devtool: 'inline-source-map',
         entry: {
             "index": "./public/js/index.js",
-            "add_meeting": "./public/js/add_meeting.js",
             "search_meetings": "./public/js/search_meetings.js",
             "teams_list": "./public/js/teams_list.js",
             "register": "./public/js/register.js",
@@ -44,18 +43,11 @@ module.exports = env => {
                 chunks: ['index']
             }),
             new HtmlWebpackPlugin({
-                title: 'Search Meetings',
+                title: 'Meetings',
                 filename: './search_meetings.html',
                 template: path.join(__dirname, 'public', 'search_meetings.html'),
                 inject: true,
                 chunks: ['search_meetings']
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Add Meetings',
-                filename: './add_meeting.html',
-                template: path.join(__dirname, 'public', 'add_meeting.html'),
-                inject: true,
-                chunks: ['add_meeting']
             }),
             new HtmlWebpackPlugin({
                 title: 'Teams',

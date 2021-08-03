@@ -10,6 +10,11 @@ import { login } from './services/auth';
 
 import addToast from './customs/app';
 
+function showBodyOnLoad() {
+    document.body.classList.remove( 'hide' );
+}
+showBodyOnLoad();
+
 function init() {
     const loginForm = document.getElementById( 'login-form' );
 

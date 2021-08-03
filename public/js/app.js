@@ -12,4 +12,8 @@ function setNavbar() {
     document.getElementById( 'nameNav' ).innerHTML = firstName;
 }
 
+function showBodyOnLoad() {
+    document.body.classList.remove( 'hide' );
+}
+showBodyOnLoad();
 setNavbar();

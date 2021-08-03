@@ -31,23 +31,40 @@ hr {
     left: 10px;
     z-index: 2;
     padding: 10px;
-    background-color: rgba(130, 211, 118, 0.4);
+    background-color: hsla(145, 45%, 60%, 0.438);
     border-left: 4px solid #2ecc71;
     box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.25);
     overflow: hidden;
     border-radius: 4px;
+    min-height: 40px;
+}
+
+.card-meeting:hover {
+    z-index: 3;
+    background: rgb(46,204,113);
+    background: linear-gradient(90deg, rgba(46,204,113,1) 0%, rgba(43,190,114,1) 100%);
+    border-left: none;
+    overflow: visible;
+    height: max-content !important;
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
 }
 
 .card-meeting-name {
     font-size: 18px;
     font-weight: 600;
-    color: hsl(145, 63%, 38%);
+    color: #2ecc71;
 }
-
+.card-meeting:hover .card-meeting-name{
+    color: white;
+}
 .card-meeting-attendees {
     font-size: 16px;
     font-weight: 300;
-    color: hsl(145, 63%, 38%);
+    color: #2ecc71;
+}
+.card-meeting:hover .card-meeting-attendees {
+    color: white;
 }
 
 .time-now {

@@ -7,6 +7,22 @@ import { fetchMeetings } from './services/meetings';
 import getMeetingDuration from './util/meetings_util';
 import { SUCCESS, TOKEN } from './constants';
 
+function formatTime( hours, minutes ) {
+    let result = '';
+    if ( hours < 10 ) {
+        result += `0${hours}`;
+    } else {
+        result += hours;
+    }
+    result += ':';
+    if ( minutes < 10 ) {
+        result += `0${minutes}`;
+    } else {
+        result += minutes;
+    }
+    return result;
+}
+
 function setDate( date ) {
     const selectedDate = document.getElementById( 'selectedDate' );
     const selectedDay = document.getElementById( 'selectedDay' );
@@ -95,11 +111,21 @@ function populateCalendar( meetings ) {
             cardMeetingDiv.style.top = `${meeting['startTime']['minutes']}px`;
             const extraHeight = ( meeting['endTime']['hours'] - meeting['startTime']['hours'] ) * 10;
             cardMeetingDiv.style.height = `${meetingDuration + extraHeight}px`;
+            const cardMeetingNameDiv = document.createElement( 'div' );
+            cardMeetingNameDiv.setAttribute( 'class', 'row' );
             const cardMeetingName = document.createElement( 'h5' );
             cardMeetingName.setAttribute( 'id', 'card-meeting-name' );
-            cardMeetingName.setAttribute( 'class', 'card-meeting-name' );
+            cardMeetingName.setAttribute( 'class', 'col-auto me-auto card-meeting-name' );
             cardMeetingName.innerHTML = meeting['name'];
-            cardMeetingDiv.appendChild( cardMeetingName );
+            const cardMeetingTime = document.createElement( 'h5' );
+            cardMeetingTime.setAttribute( 'id', 'card-meeting-time' );
+            cardMeetingTime.setAttribute( 'class', 'col-auto card-meeting-name' );
+            const startTime = formatTime( meeting['startTime']['hours'], meeting['startTime']['minutes'] );
+            const endTime = formatTime( meeting['endTime']['hours'], meeting['endTime']['minutes'] );
+            cardMeetingTime.innerHTML = `${startTime}-${endTime} (${meetingDuration} mins)`;
+            cardMeetingNameDiv.appendChild( cardMeetingName );
+            cardMeetingNameDiv.appendChild( cardMeetingTime );
+            cardMeetingDiv.appendChild( cardMeetingNameDiv );
             const cardMeetingAttendees = document.createElement( 'p' );
             cardMeetingAttendees.setAttribute( 'id', 'card-meeting-attendees' );
             cardMeetingAttendees.setAttribute( 'class', 'card-meeting-attendees' );

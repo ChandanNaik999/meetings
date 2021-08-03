@@ -8,6 +8,11 @@ import addToast from './customs/app';
 import { register } from './services/auth';
 import { ERROR, SUCCESS } from './constants';
 
+function showBodyOnLoad() {
+    document.body.classList.remove( 'hide' );
+}
+showBodyOnLoad();
+
 function init() {
     const loginForm = document.getElementById( 'register-form' );
 

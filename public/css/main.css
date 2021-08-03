@@ -193,3 +193,10 @@ body {
     margin-top: 0.5rem;
     border: none;
 }
+
+
+.custom-link {
+    color: #2ecc71;
+    font-weight: 400;
+    font-size: 1rem;
+  }

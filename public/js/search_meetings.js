@@ -66,6 +66,7 @@ function populateMeetingsList( meetings, users ) {
     if ( meetings && meetings.length > 0 ) {
         const meetingsListTitle = document.getElementById( 'meetingsListTitle' );
         meetingsListTitle.innerHTML = 'Meetings matching search criteria';
+        meetingsListTitle.style.display = 'none';
 
         meetings.forEach( ( meeting ) => {
             const attendees = [];
@@ -80,17 +81,31 @@ function populateMeetingsList( meetings, users ) {
             const cardBody = document.createElement( 'div' );
             cardBody.setAttribute( 'class', 'card-body' );
 
-            const cardTitle = document.createElement( 'h5' );
+            const cardMeetingNameDiv = document.createElement( 'div' );
+            cardMeetingNameDiv.setAttribute( 'class', 'row' );
+
+            const cardMeetingName = document.createElement( 'h4' );
+            cardMeetingName.setAttribute( 'id', 'card-meeting-name' );
+            cardMeetingName.setAttribute( 'class', 'col-auto me-auto card-meeting-name' );
+            cardMeetingName.innerHTML = meeting['name'];
+
+            const cardMeetingTime = document.createElement( 'h5' );
+            cardMeetingTime.setAttribute( 'class', 'col-auto card-meeting-name' );
             const date = new Date( meeting['date'] );
             const startTime = formatTime( meeting['startTime']['hours'], meeting['startTime']['minutes'] );
             const endTime = formatTime( meeting['endTime']['hours'], meeting['endTime']['minutes'] );
-            cardTitle.innerHTML = `${date.toDateString()}, ${startTime}-${endTime}`;
-            cardBody.appendChild( cardTitle );
+            cardMeetingTime.innerHTML = `${date.toDateString()}, ${startTime}-${endTime}`;
+
+            cardMeetingNameDiv.appendChild( cardMeetingName );
+            cardMeetingNameDiv.appendChild( cardMeetingTime );
+            // cardMeetingDiv.appendChild( cardMeetingNameDiv );
+
+            cardBody.appendChild( cardMeetingNameDiv );
             const cardText = document.createElement( 'p' );
-            cardText.innerHTML = meeting['name'];
+            cardText.innerHTML = meeting['description'];
             cardBody.appendChild( cardText );
             const buttonExcuse = document.createElement( 'button' );
-            buttonExcuse.innerHTML = 'Excuse Yourself';
+            buttonExcuse.innerHTML = 'Leave meeting';
             buttonExcuse.setAttribute( 'class', 'button-outline-red px-4' );
             buttonExcuse.addEventListener( 'click', () => {
                 excuseFromMeeting( meeting )
@@ -187,6 +202,7 @@ function populateMeetingsList( meetings, users ) {
     } else {
         const meetingsListTitle = document.getElementById( 'meetingsListTitle' );
         meetingsListTitle.innerHTML = 'No meetings found with given search criteria';
+        meetingsListTitle.style.display = 'block';
     }
 }
 

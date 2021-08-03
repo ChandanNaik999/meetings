@@ -6,12 +6,13 @@
     <title>Meetings</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-<script defer src="vendors-node_modules_axios_index_js-node_modules_core-js_stable_index_js-node_modules_regener-157406.bundle.js"></script><script defer src="public_js_customs_app_js-public_js_services_auth_js-public_css_main_css-data_image_svg_xml_3c-4ea2a1.bundle.js"></script><script defer src="public_js_app_js-public_js_data_add_meeting_form_js-public_js_services_meetings_js-public_js_-a4504f.bundle.js"></script><script defer src="search_meetings.bundle.js"></script></head>
+    <style> .hide { display: none; }</style>
+<script defer src="vendors-node_modules_axios_index_js-node_modules_core-js_stable_index_js-node_modules_regener-157406.bundle.js"></script><script defer src="public_js_customs_app_js-public_js_services_auth_js-public_css_main_css-data_image_svg_xml_3c-4ea2a1.bundle.js"></script><script defer src="search_meetings.bundle.js"></script></head>
 
-<body>
+<body class="hide">
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -57,7 +58,7 @@
             <div class="col-auto">
                 <input type="text" name="searchText" id="searchText" placeholder="Search text"class="input-text  search-text-custom mx-2">
                 <button class="button-outline mx-2" id="search-form"> Search</button>
-                <button class="button mx-2" id="addMeeting"> Add New Meeting</button>
+                <button class="button mx-2" id="addMeeting"> Create New Meeting</button>
             </div>
         </div>
 
@@ -132,7 +133,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add a Meeting</h4>
+                        <h4 class="modal-title">Create a Meeting</h4>
                         <button type="button" data-dismiss="modal" id="modalDismiss"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
@@ -190,7 +191,7 @@
                                   </div>
                           
                                   <div class="form-group mb-4">
-                                    <label class="mb-1" for="textareaMeetingDescription">Search For </label>
+                                    <label class="mb-1" for="textareaMeetingDescription">Description </label>
                                     <textarea class="p-2 form-control" id="textareaMeetingDescription" spellcheck="false"
                                       placeholder="What is the agenda of the meeting"></textarea>
                                   </div>
@@ -209,7 +210,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="button mx-2" data-dismiss="modal" id="submitAddMeeting">Add meeting</button>
+                        <button class="button mx-2" data-dismiss="modal" id="submitAddMeeting">Create Meeting</button>
                         <!-- <button class="btn btn-primary">Add Meeting</button> -->
                     </div>
                 </div>
