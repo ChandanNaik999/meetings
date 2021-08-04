@@ -105,7 +105,7 @@ function populateTeams( teams ) {
 
             const colSelectButton = document.createElement( 'button' );
             colSelectButton.setAttribute( 'class', 'button mx-2' );
-            colSelectButton.innerHTML = 'Add';
+            colSelectButton.innerHTML = 'Add member';
             colSelectButton.addEventListener( 'click', () => {
                 if ( selectMember.value !== 'none' ) {
                     addMemberToTeam( team, selectMember.value )
@@ -201,6 +201,14 @@ function attendeeType( attendee ) {
     }
     return type;
 }
+
+function resetForm() {
+    document.getElementById( 'inputTeamName' ).value = '';
+    document.getElementById( 'inputShortName' ).value = '';
+    document.getElementById( 'teamDescription' ).value = '';
+    document.getElementById( 'inputMembers' ).value = '';
+}
+
 let myModal = null;
 
 document.getElementById( 'addNewTeamButton' ).addEventListener( 'click', () => {
@@ -267,6 +275,10 @@ document.getElementById( 'submitAddTeam' ).addEventListener( 'click', () => {
             if ( response.message === SUCCESS ) {
                 myModal.hide();
                 addToast( 'Team added successfully', document.body, SUCCESS );
+                resetForm();
+                setTimeout( () => {
+                    window.location.reload();
+                }, 1500 );
             } else {
                 addToast( `Error adding team: ${response.message}`, document.body, ERROR );
             }

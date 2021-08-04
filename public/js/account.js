@@ -5,7 +5,7 @@ import addToast from './customs/app';
 import './app';
 import { logout } from './services/auth';
 import { SUCCESS, ERROR, ID, API_BASE_URL, NAME, EMAIL } from './constants';
-import { setProfilePic, updateUserDetails } from './services/profile';
+import { setProfilePic, updateUserDetails, getTotalTeams, getTotalMeetings } from './services/profile';
 
 document.getElementById( 'editImage' ).addEventListener( 'change', ( ) => {
     const formData = new FormData();
@@ -55,6 +55,26 @@ function init() {
 
     const fullName = document.getElementById( 'profileName' );
     fullName.innerHTML = localStorage.getItem( NAME );
+
+    getTotalTeams( )
+        .then( ( response ) => {
+            if ( response.message === SUCCESS ) {
+                document.getElementById( 'stat1Value' ).innerHTML = response.data[0].count;
+            }
+        } )
+        .catch( ( ) => {
+            document.getElementById( 'stat1Value' ).innerHTML = ' - ';
+        } );
+
+    getTotalMeetings( )
+        .then( ( response ) => {
+            if ( response.message === SUCCESS ) {
+                document.getElementById( 'stat2Value' ).innerHTML = response.data[0].count;
+            }
+        } )
+        .catch( ( ) => {
+            document.getElementById( 'stat2Value' ).innerHTML = ' - ';
+        } );
 }
 
 document.getElementById( 'saveChanges' ).addEventListener( 'click', () => {

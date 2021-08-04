@@ -14,6 +14,7 @@ module.exports = env => {
             "register": "./public/js/register.js",
             "login": "./public/js/login.js",
             "account": "./public/js/account.js",
+            "404": "./public/js/404.js",
         },
         output: {
             path: path.join(__dirname, "dist"),
@@ -76,6 +77,13 @@ module.exports = env => {
                 template: path.join(__dirname, 'public', 'account.html'),
                 inject: true,
                 chunks: ['account']
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Page Not Found',
+                filename: './404.html',
+                template: path.join(__dirname, 'public', '404.html'),
+                inject: true,
+                chunks: ['404']
             }),
             new Dotenv({
                 path: envFileName,

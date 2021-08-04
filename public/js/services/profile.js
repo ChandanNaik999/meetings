@@ -45,8 +45,36 @@ async function updateUserDetails( userData, action ) {
     return response.data;
 }
 
+async function getTotalTeams( ) {
+    const response = await axios.get(
+        `${API_BASE_URL}/account/teams`,
+        {
+            headers: {
+                Authorization: `${getToken()}`,
+            },
+        },
+    );
+
+    return response.data;
+}
+
+async function getTotalMeetings( ) {
+    const response = await axios.get(
+        `${API_BASE_URL}/account/meetings`,
+        {
+            headers: {
+                Authorization: `${getToken()}`,
+            },
+        },
+    );
+
+    return response.data;
+}
+
 export {
     setProfilePic,
     getProfilePic,
     updateUserDetails,
+    getTotalTeams,
+    getTotalMeetings,
 };

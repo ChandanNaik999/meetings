@@ -457,6 +457,9 @@ document.getElementById( 'submitAddMeeting' ).addEventListener( 'click', () => {
                                     if ( response.message === SUCCESS ) {
                                         addToast( 'Meeting added successfully', document.body, SUCCESS );
                                         resetForm();
+                                        setTimeout( () => {
+                                            window.location.reload();
+                                        }, 1500 );
                                     } else {
                                         addToast( `Error adding meeting: ${response.message}`, document.body, ERROR );
                                     }
