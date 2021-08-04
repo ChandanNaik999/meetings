@@ -23,7 +23,7 @@ function init() {
 
         const emailEl = document.querySelector( '#emailInput' );
         const passwordEl = document.querySelector( '#passwordInput' );
-        const email = emailEl.value;
+        const email = emailEl.value.toLowerCase();
         const password = passwordEl.value;
 
         login( { email, password } )

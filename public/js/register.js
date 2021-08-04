@@ -24,7 +24,7 @@ function init() {
         const passwordEl = document.querySelector( '#passwordInput' );
 
         const name = nameEl.value;
-        const email = emailEl.value;
+        const email = emailEl.value.toLowerCase();
         const password = passwordEl.value;
 
         register( { name, email, password } )

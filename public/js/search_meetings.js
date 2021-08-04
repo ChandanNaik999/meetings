@@ -23,24 +23,28 @@ document.getElementById( 'pastButton' ).addEventListener( 'click', ( ) => {
     resetNav();
     document.getElementById( 'pastButton' ).style.background = '#f5f8fa';
     searchDate = 'past';
+    document.getElementById( 'search-form' ).click();
 } );
 
 document.getElementById( 'presentButton' ).addEventListener( 'click', ( ) => {
     resetNav();
     document.getElementById( 'presentButton' ).style.background = '#f5f8fa';
     searchDate = 'present';
+    document.getElementById( 'search-form' ).click();
 } );
 
 document.getElementById( 'allButton' ).addEventListener( 'click', ( ) => {
     resetNav();
     document.getElementById( 'allButton' ).style.background = '#f5f8fa';
     searchDate = 'all';
+    document.getElementById( 'search-form' ).click();
 } );
 
 document.getElementById( 'upcomingButton' ).addEventListener( 'click', ( ) => {
     resetNav();
     document.getElementById( 'upcomingButton' ).style.background = '#f5f8fa';
     searchDate = 'upcoming';
+    document.getElementById( 'search-form' ).click();
 } );
 
 function formatTime( hours, minutes ) {
@@ -65,7 +69,6 @@ function populateMeetingsList( meetings, users ) {
 
     if ( meetings && meetings.length > 0 ) {
         const meetingsListTitle = document.getElementById( 'meetingsListTitle' );
-        meetingsListTitle.innerHTML = 'Meetings matching search criteria';
         meetingsListTitle.style.display = 'none';
 
         meetings.forEach( ( meeting ) => {

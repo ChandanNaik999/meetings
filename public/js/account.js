@@ -25,6 +25,9 @@ document.getElementById( 'editImage' ).addEventListener( 'change', ( ) => {
                 };
                 reader.readAsDataURL( image );
                 addToast( 'Profile pic updated successfully', document.body, SUCCESS );
+                setTimeout( () => {
+                    window.location.reload();
+                }, 1500 );
             } else {
                 addToast( `Error adding profile pic: ${response.message}`, document.body, ERROR );
             }
@@ -101,6 +104,10 @@ document.getElementById( 'saveChanges' ).addEventListener( 'click', () => {
                         logout();
                         window.location = '/login';
                     }, 2000 );
+                } else {
+                    setTimeout( () => {
+                        window.location.reload();
+                    }, 1500 );
                 }
             } else {
                 addToast( `Error updating your details: ${response.message}`, document.body, ERROR );

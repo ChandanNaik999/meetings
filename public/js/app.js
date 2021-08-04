@@ -15,5 +15,6 @@ function setNavbar() {
 function showBodyOnLoad() {
     document.body.classList.remove( 'hide' );
 }
-showBodyOnLoad();
+
 setNavbar();
+showBodyOnLoad();
