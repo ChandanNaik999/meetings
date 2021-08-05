@@ -62,7 +62,7 @@ function init() {
     getTotalTeams( )
         .then( ( response ) => {
             if ( response.message === SUCCESS ) {
-                document.getElementById( 'stat1Value' ).innerHTML = response.data[0].count;
+                document.getElementById( 'stat1Value' ).innerHTML = response.data;
             }
         } )
         .catch( ( ) => {
@@ -72,7 +72,7 @@ function init() {
     getTotalMeetings( )
         .then( ( response ) => {
             if ( response.message === SUCCESS ) {
-                document.getElementById( 'stat2Value' ).innerHTML = response.data[0].count;
+                document.getElementById( 'stat2Value' ).innerHTML = response.data;
             }
         } )
         .catch( ( ) => {

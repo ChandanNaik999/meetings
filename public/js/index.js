@@ -126,10 +126,15 @@ function populateCalendar( meetings ) {
             cardMeetingNameDiv.appendChild( cardMeetingName );
             cardMeetingNameDiv.appendChild( cardMeetingTime );
             cardMeetingDiv.appendChild( cardMeetingNameDiv );
+            const cardMeetingDescription = document.createElement( 'p' );
+            cardMeetingDescription.setAttribute( 'id', 'card-meeting-description' );
+            cardMeetingDescription.setAttribute( 'class', 'card-meeting-description' );
+            cardMeetingDescription.innerHTML = meeting['description'];
+            cardMeetingDiv.appendChild( cardMeetingDescription );
             const cardMeetingAttendees = document.createElement( 'p' );
             cardMeetingAttendees.setAttribute( 'id', 'card-meeting-attendees' );
             cardMeetingAttendees.setAttribute( 'class', 'card-meeting-attendees' );
-            cardMeetingAttendees.innerHTML = attendees.join( ', ' );
+            cardMeetingAttendees.innerHTML = `Attendees: ${attendees.join( ', ' )}`;
             cardMeetingDiv.appendChild( cardMeetingAttendees );
             const startTimeHours = meeting['startTime']['hours'];
             const hourContainer = document.getElementById( `calendarHour${startTimeHours}` );

@@ -63,7 +63,18 @@ hr {
     font-weight: 300;
     color: #2ecc71;
 }
+
+.card-meeting-description {
+    font-size: 18px;
+    font-weight: 400;
+    color: #2ecc71;
+}
+
 .card-meeting:hover .card-meeting-attendees {
+    color: white;
+}
+
+.card-meeting:hover .card-meeting-description {
     color: white;
 }
 
